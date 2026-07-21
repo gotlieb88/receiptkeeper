@@ -1,0 +1,7 @@
+*
+!app.py
+!manifest.json
+!sw.js
+!requirements.txt
+!.gitignore
+!.streamlit/
