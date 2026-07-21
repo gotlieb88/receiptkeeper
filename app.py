@@ -21,8 +21,10 @@ from reportlab.lib.enums import TA_CENTER
 # 2. For Gmail: place credentials.json in this folder
 
 # ====================== CONFIG ======================
-OPENAI_API_KEY = "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"
+import os
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
+
 conn = sqlite3.connect('receipts.db', check_same_thread=False)
 c = conn.cursor()
 
