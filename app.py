@@ -24,24 +24,25 @@ from reportlab.lib.enums import TA_CENTER
 import os
 import streamlit as st
 
-# DEBUG LINE - remove after it works
-st.error("DEBUG: Running NEW safe key code (July 21)")
+st.success("DEBUG: NEW code running")
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+key_from_env = os.getenv("OPENAI_API_KEY")
+st.info(f"DEBUG: Env var length = {len(key_from_env) if key_from_env else 0}")
+
+OPENAI_API_KEY = key_from_env
 
 if not OPENAI_API_KEY:
     try:
-        if st.secrets and "OPENAI_API_KEY" in st.secrets:
-            OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
-    except Exception:
-        OPENAI_API_KEY = None
+        OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY")
+        st.info("DEBUG: Using secrets.toml")
+    except:
+        st.info("DEBUG: No secrets.toml")
 
 if not OPENAI_API_KEY:
-    st.error("❌ OpenAI API key not found.\n\n"
-             "Env var on Render is set, but code may be old.\n"
-             "Please check Deploys tab for latest build.")
+    st.error("❌ No key found")
     st.stop()
 
+st.success("✅ Key loaded successfully!")
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 conn = sqlite3.connect('receipts.db', check_same_thread=False)
