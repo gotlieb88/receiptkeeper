@@ -24,7 +24,9 @@ from reportlab.lib.enums import TA_CENTER
 import os
 import streamlit as st
 
-# Safe key loading - works even if no secrets.toml exists
+# DEBUG LINE - remove after it works
+st.error("DEBUG: Running NEW safe key code (July 21)")
+
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 if not OPENAI_API_KEY:
@@ -36,9 +38,8 @@ if not OPENAI_API_KEY:
 
 if not OPENAI_API_KEY:
     st.error("❌ OpenAI API key not found.\n\n"
-             "Please do one of the following:\n"
-             "• Create `.streamlit/secrets.toml` with your key (for local development)\n"
-             "• Set OPENAI_API_KEY as an environment variable (for Render)")
+             "Env var on Render is set, but code may be old.\n"
+             "Please check Deploys tab for latest build.")
     st.stop()
 
 client = OpenAI(api_key=OPENAI_API_KEY)
