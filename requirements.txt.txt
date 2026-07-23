@@ -1,0 +1,8 @@
+streamlit
+pandas
+pillow
+openai
+reportlab
+google-auth-oauthlib
+google-api-python-client
+streamlit-local-storage==0.0.25
